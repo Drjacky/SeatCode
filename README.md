@@ -6,9 +6,13 @@ Assume that the square directly North from (x, y) is (x, y+1).
 
 ## Input
 To ease the processing of the plateau creation and reading the rover’s movements, all data will be sent in JSON format
+
 **topRightCorner:** indicates the upper-right coordinates of the plateau.
+
 **roverPosition:** Indicates the rover initial position inside the plateau
+
 **roverDirection:** Indicates the rover initial heading
+
 **movements:** Instructions telling the rover how to explore the plateau.
 
 ## Output
