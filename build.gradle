@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+group 'app.web.drjackycv'
+version '1.0.0'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin/'
+    test.java.srcDirs += 'src/test/kotlin/'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.json:json:20190722"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+task testJar {
+    doFirst {
+        shadowJar {
+            archiveClassifier.set('tests')
+            from sourceSets.test.output
+            configurations = [project.configurations.testRuntime]
+        }
+    }
+    finalizedBy(shadowJar)
+}
